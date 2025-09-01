@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "modlistexporter",
+  "version": "${version}",
+  "name": "ModList Exporter",
+  "description": "Export your installed mod list as plain text and markdown, to file and clipboard.",
+  "authors": [
+    "Stephen Beacham"
+  ],
+  "contact": {
+    "homepage": "https://github.com/yourname/ModList-Exportor",
+    "sources": "https://github.com/yourname/ModList-Exportor"
+  },
+  "license": "MIT",
+  "icon": "assets/modlistexporter/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.yourname.modlistexporter.ModListExporter"
+    ]
+  },
+  "mixins": [
+    "modlistexporter.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.21.1",
+    "java": ">=21"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

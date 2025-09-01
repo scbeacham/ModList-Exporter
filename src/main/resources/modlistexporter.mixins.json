@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.yourname.modlistexporter.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ChatScreenMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
