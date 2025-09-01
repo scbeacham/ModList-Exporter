@@ -5,6 +5,7 @@ import net.minecraft.text.Text;
 import com.yourname.modlistexporter.utils.ExportFormatter;
 import com.yourname.modlistexporter.utils.ClipboardHelper;
 import com.yourname.modlistexporter.ModListExporter;
+import com.yourname.modlistexporter.config.ModConfig;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,7 +16,7 @@ import net.fabricmc.loader.api.ModContainer;
 
 /**
  * Client-side command handler for the /modlist command.
- * Exports the current mod list to both plain text and Markdown files, and copies Markdown to clipboard.
+ * Exports the current mod list to both plain text and Markdown files, and copies content to clipboard based on config.
  */
 public class ExportCommand {
 
@@ -31,9 +32,23 @@ public class ExportCommand {
      * Called from the ChatScreenMixin when the command is detected.
      */
     public static void handleModlistCommand() {
+        handleModlistCommand(false);
+    }
+
+    /**
+     * Handles the /modlist command with auto-export support.
+     *
+     * @param isAutoExport true if this is an auto-export, false if manual command
+     */
+    public static void handleModlistCommand(boolean isAutoExport) {
         MinecraftClient client = MinecraftClient.getInstance();
 
         try {
+            // Initialize config if not already done
+            if (ModListExporter.getConfig() == null) {
+                ModListExporter.initializeConfig();
+            }
+
             // Get all loaded mods
             Collection<ModContainer> mods = FabricLoader.getInstance().getAllMods();
 
@@ -55,24 +70,41 @@ public class ExportCommand {
             Files.writeString(plainTextFile, plainTextList);
             Files.writeString(markdownFile, markdownList);
 
-            // Copy Markdown to clipboard
-            boolean clipboardSuccess = ClipboardHelper.copyToClipboard(markdownList);
+            // Get configuration for clipboard format
+            ModConfig config = ModListExporter.getConfig();
+            String clipboardContent = config != null && config.isClipboardFormatMarkdown() ? markdownList : plainTextList;
+            String clipboardFormatName = config != null && config.isClipboardFormatMarkdown() ? "Markdown" : "Plain text";
+
+            // Copy to clipboard
+            boolean clipboardSuccess = ClipboardHelper.copyToClipboard(clipboardContent);
 
             // Send success message to the player
             if (client.player != null) {
-                if (clipboardSuccess) {
-                    client.player.sendMessage(Text.literal("✅ Exported mod list to modlist.txt and modlist.md (Markdown copied to clipboard)"), false);
+                String message;
+                if (isAutoExport) {
+                    message = clipboardSuccess ? 
+                        "✅ Auto-exported mod list on startup (" + clipboardFormatName + " copied to clipboard)" :
+                        "✅ Auto-exported mod list on startup (clipboard unavailable)";
                 } else {
-                    client.player.sendMessage(Text.literal("✅ Exported mod list to modlist.txt and modlist.md (clipboard unavailable)"), false);
+                    message = clipboardSuccess ? 
+                        "✅ Exported mod list to modlist.txt and modlist.md (" + clipboardFormatName + " copied to clipboard)" :
+                        "✅ Exported mod list to modlist.txt and modlist.md (clipboard unavailable)";
                 }
+                client.player.sendMessage(Text.literal(message), false);
             }
 
-            ModListExporter.LOGGER.info("Successfully exported mod list to modlist.txt and modlist.md, Markdown copied to clipboard");
+            String logMessage = isAutoExport ? 
+                "Successfully auto-exported mod list to modlist.txt and modlist.md, " + clipboardFormatName + " copied to clipboard" :
+                "Successfully exported mod list to modlist.txt and modlist.md, " + clipboardFormatName + " copied to clipboard";
+            ModListExporter.LOGGER.info(logMessage);
 
         } catch (IOException e) {
             // Send error message to the player
             if (client.player != null) {
-                client.player.sendMessage(Text.literal("❌ Failed to export mod list: " + e.getMessage()), false);
+                String errorMessage = isAutoExport ? 
+                    "❌ Failed to auto-export mod list: " + e.getMessage() :
+                    "❌ Failed to export mod list: " + e.getMessage();
+                client.player.sendMessage(Text.literal(errorMessage), false);
             }
 
             ModListExporter.LOGGER.error("Failed to export mod list", e);

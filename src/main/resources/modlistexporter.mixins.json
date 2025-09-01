@@ -3,7 +3,8 @@
   "package": "com.yourname.modlistexporter.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ChatScreenMixin"
+    "ChatScreenMixin",
+    "MinecraftClientMixin"
   ],
   "client": [
   ],

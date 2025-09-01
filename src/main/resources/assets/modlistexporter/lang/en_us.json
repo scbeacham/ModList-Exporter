@@ -1,4 +1,6 @@
 {
   "modlistexporter.title": "ModList Exporter",
-  "modlistexporter.description": "Export your installed mod list as plain text and markdown, to file and clipboard."
+  "modlistexporter.description": "Export your installed mod list as plain text and markdown, to file and clipboard.",
+  "key.modlistexporter.export": "Export Mod List",
+  "category.modlistexporter.general": "ModList Exporter"
 }
