@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "modlistexporter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "ModList Exporter",
   "description": "Export your Minecraft mod list in multiple formats for easy sharing. Features include plain text and Markdown export, clipboard integration, configurable auto-export, and F9 keybinding.",
   "authors": [

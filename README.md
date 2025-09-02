@@ -15,15 +15,24 @@ A lightweight Minecraft Fabric mod that exports your installed mod list in multi
 ## 🚀 Installation
 
 ### Requirements
-- **Minecraft**: 1.21.1
+- **Minecraft**: 1.19.4, 1.20.4, 1.21.1
+- **Fabric Loader**: 0.15.0+
+- **Java**: 21+
+
+## 🚀 Installation
+
+### Requirements
+- **Minecraft**: 1.19.4, 1.20.4, 1.21.1
 - **Fabric Loader**: 0.15.0+
 - **Java**: 21+
 
 ### Steps
-1. Download the latest release JAR from the [releases page](https://github.com/yourname/ModList-Exportor/releases)
+1. Download the latest release JAR for your Minecraft version from the [releases page](https://github.com/yourname/ModList-Exportor/releases)
 2. Place the JAR file in your Minecraft `mods` folder
 3. Launch Minecraft with Fabric Loader
 4. The mod will automatically create its configuration file on first run
+
+> **Note**: v1.1.0 introduces multi-version support! Choose the JAR file matching your Minecraft version (e.g., `modlistexporter-fabric-mc1.20.4-1.1.0.jar` for Minecraft 1.20.4).
 
 ## 📖 Usage
 
@@ -68,7 +77,7 @@ The mod creates a configuration file at `config/modlistexporter/config.json`:
 ```
 Fabric Loader – 0.15.11 (FabricMC)
 Minecraft – 1.21.1 (Unknown)
-ModList Exporter – 1.0.0 (Stephen Beacham)
+ModList Exporter – 1.1.0 (Stephen Beacham)
 ```
 
 ### Markdown (`modlist.md`)
@@ -77,7 +86,7 @@ ModList Exporter – 1.0.0 (Stephen Beacham)
 |------|---------|--------|
 | Fabric Loader | 0.15.11 | FabricMC |
 | Minecraft | 1.21.1 | Unknown |
-| ModList Exporter | 1.0.0 | Stephen Beacham |
+| ModList Exporter | 1.1.0 | Stephen Beacham |
 ```
 
 ## 🌍 Translations
@@ -101,9 +110,27 @@ cd ModList-Exportor
 ./gradlew build
 ```
 
+## 🛠️ Development
+
+### Building
+```bash
+git clone https://github.com/yourname/ModList-Exportor.git
+cd ModList-Exportor
+./gradlew build
+```
+
+The project uses a multi-module setup:
+- `:common` - Shared code (version-agnostic)
+- `:fabric-1.19.4` - Minecraft 1.19.4 support
+- `:fabric-1.20.4` - Minecraft 1.20.4 support  
+- `:fabric-1.21.1` - Minecraft 1.21.1 support
+
 ### Running
 ```bash
-./gradlew runClient
+# Run specific version
+./gradlew :fabric-1.21.1:runClient
+./gradlew :fabric-1.20.4:runClient
+./gradlew :fabric-1.19.4:runClient
 ```
 
 ### Testing

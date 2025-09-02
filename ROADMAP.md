@@ -1,6 +1,32 @@
 # ModList Exporter - Development Roadmap
 
-## 🎯 Version 1.0.0 (Current Release)
+## 🎯 Version 1.1.0 (Current Release) — Compatibility Expansion
+
+### ✅ Completed Features
+
+#### Multi-Version Support
+- [x] **Multi-Module Architecture**: Shared `:common` module with version-specific modules
+- [x] **Minecraft 1.19.4 Support**: Full compatibility with 1.19.4
+- [x] **Minecraft 1.20.4 Support**: Full compatibility with 1.20.4
+- [x] **Minecraft 1.21.1 Support**: Maintained compatibility with 1.21.1
+- [x] **Version-Specific Mixins**: Optimized injection points for each version
+- [x] **Gradle Multi-Module Setup**: Clean separation of concerns
+
+#### CI/CD Pipeline
+- [x] **GitHub Actions Workflow**: Automated builds for all versions
+- [x] **Matrix Strategy**: Parallel builds for 1.19.4, 1.20.4, 1.21.1
+- [x] **Artifact Upload**: Automatic JAR uploads with version-specific naming
+- [x] **Common Module Testing**: Separate test job for shared code
+- [x] **Build Caching**: Optimized Gradle caching for faster builds
+
+#### Quality Assurance
+- [x] **Cross-Version Testing**: Verified functionality across all supported versions
+- [x] **Mixin Compatibility**: Ensured mixin injection points work correctly
+- [x] **Version-Specific JARs**: Proper naming convention (`modlistexporter-fabric-mc<version>-1.1.0.jar`)
+- [x] **Zero-Dependency Design**: Maintained Fabric Loader only requirement
+- [x] **Backward Compatibility**: All existing features preserved
+
+### Previous Version 1.0.0 Features (Maintained)
 
 ### ✅ Completed Features
 
@@ -55,7 +81,9 @@
 
 ## 🚀 Future Versions
 
-### Version 1.1.0 (Planned)
+## 🚀 Future Versions
+
+### Version 1.2.0 (Planned)
 
 #### Enhanced Export Options
 - [ ] **Export Format Selection**: Choose between plain text, Markdown, JSON, or CSV
