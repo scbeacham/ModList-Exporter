@@ -34,9 +34,9 @@ public class ExportKeybindTest {
         var keybind = ExportKeybind.getKeybind();
         
         assertNotNull(keybind, "Keybinding should not be null");
-        assertEquals("key.modlistexporter.export", keybind.getTranslationKey(), 
+        assertEquals("modlistexporter.key.export", keybind.getTranslationKey(), 
             "Translation key should match expected value");
-        assertEquals("category.modlistexporter.general", keybind.getCategory(), 
+        assertEquals("modlistexporter.key.category", keybind.getCategory(), 
             "Category should match expected value");
     }
 

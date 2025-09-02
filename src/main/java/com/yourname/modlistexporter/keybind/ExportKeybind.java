@@ -20,10 +20,10 @@ public class ExportKeybind {
     public static void register() {
         // Create the keybinding with default F9 key
         exportKeybind = new KeyBinding(
-            "key.modlistexporter.export", // Translation key
+            "modlistexporter.key.export", // Translation key
             InputUtil.Type.KEYSYM, // Keyboard key
             GLFW.GLFW_KEY_F9, // Default F9 key
-            "category.modlistexporter.general" // Category translation key
+            "modlistexporter.key.category" // Category translation key
         );
         
         ModListExporter.LOGGER.info("Registered export keybinding with default F9 key");

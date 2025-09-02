@@ -7,6 +7,7 @@ import com.yourname.modlistexporter.commands.ExportCommand;
 import com.yourname.modlistexporter.config.ModConfig;
 import com.yourname.modlistexporter.keybind.ExportKeybind;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
 
 import java.nio.file.Path;
 

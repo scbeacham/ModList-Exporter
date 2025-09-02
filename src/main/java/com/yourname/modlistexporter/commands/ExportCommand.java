@@ -80,17 +80,34 @@ public class ExportCommand {
 
             // Send success message to the player
             if (client.player != null) {
-                String message;
+                String messageKey;
                 if (isAutoExport) {
-                    message = clipboardSuccess ? 
-                        "✅ Auto-exported mod list on startup (" + clipboardFormatName + " copied to clipboard)" :
-                        "✅ Auto-exported mod list on startup (clipboard unavailable)";
+                    messageKey = "modlistexporter.chat.export_auto";
                 } else {
-                    message = clipboardSuccess ? 
-                        "✅ Exported mod list to modlist.txt and modlist.md (" + clipboardFormatName + " copied to clipboard)" :
-                        "✅ Exported mod list to modlist.txt and modlist.md (clipboard unavailable)";
+                    messageKey = "modlistexporter.chat.export_success";
                 }
-                client.player.sendMessage(Text.literal(message), false);
+                
+                // Try to get translated text, fallback to hardcoded if not found
+                Text message = Text.translatable(messageKey, clipboardFormatName);
+                String translatedText = message.getString();
+                
+                // Debug logging to see what's happening
+                ModListExporter.LOGGER.info("Translation key: {}", messageKey);
+                ModListExporter.LOGGER.info("Translated text: {}", translatedText);
+                
+                // If translation failed (key == translated text), use fallback
+                if (translatedText.equals(messageKey)) {
+                    ModListExporter.LOGGER.warn("Translation failed for key: {}, using fallback", messageKey);
+                    String fallbackMessage;
+                    if (isAutoExport) {
+                        fallbackMessage = "✅ Auto-exported mod list on startup (" + clipboardFormatName + " copied to clipboard)";
+                    } else {
+                        fallbackMessage = "✅ Exported mod list to config/modlistexporter/modlist.txt and modlist.md (" + clipboardFormatName + " copied to clipboard)";
+                    }
+                    message = Text.literal(fallbackMessage);
+                }
+                
+                client.player.sendMessage(message, false);
             }
 
             String logMessage = isAutoExport ? 
@@ -101,10 +118,27 @@ public class ExportCommand {
         } catch (IOException e) {
             // Send error message to the player
             if (client.player != null) {
-                String errorMessage = isAutoExport ? 
-                    "❌ Failed to auto-export mod list: " + e.getMessage() :
-                    "❌ Failed to export mod list: " + e.getMessage();
-                client.player.sendMessage(Text.literal(errorMessage), false);
+                String errorMessageKey = isAutoExport ? 
+                    "modlistexporter.chat.export_auto_fail" :
+                    "modlistexporter.chat.export_fail";
+                
+                // Try to get translated text, fallback to hardcoded if not found
+                Text errorMessage = Text.translatable(errorMessageKey, e.getMessage());
+                String translatedErrorText = errorMessage.getString();
+                
+                // If translation failed (key == translated text), use fallback
+                if (translatedErrorText.equals(errorMessageKey)) {
+                    ModListExporter.LOGGER.warn("Translation failed for error key: {}, using fallback", errorMessageKey);
+                    String fallbackErrorMessage;
+                    if (isAutoExport) {
+                        fallbackErrorMessage = "❌ Failed to auto-export mod list: " + e.getMessage();
+                    } else {
+                        fallbackErrorMessage = "❌ Failed to export mod list: " + e.getMessage();
+                    }
+                    errorMessage = Text.literal(fallbackErrorMessage);
+                }
+                
+                client.player.sendMessage(errorMessage, false);
             }
 
             ModListExporter.LOGGER.error("Failed to export mod list", e);

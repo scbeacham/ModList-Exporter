@@ -184,6 +184,54 @@ src/
 - **Gradle**: 8.6+
 - **Gson**: 2.10.1 (for JSON configuration)
 
+## Contributing
+
+### Adding Translations
+
+ModList Exporter supports community translations! To add a new language:
+
+1. **Create a new language file** in `src/main/resources/assets/modlistexporter/lang/`
+   - Use the format: `{language_code}_{country_code}.json` (e.g., `es_es.json`, `fr_fr.json`, `de_de.json`)
+   - Copy the structure from `en_us.json` as a template
+
+2. **Translate all keys** in the file:
+   ```json
+   {
+     "modlistexporter.key.category": "Your Category Name",
+     "modlistexporter.key.export": "Your Export Button Text",
+     "modlistexporter.chat.export_success": "✅ Your success message (%s copied to clipboard)",
+     "modlistexporter.chat.export_auto": "✅ Your auto-export message (%s copied to clipboard)",
+     "modlistexporter.chat.export_fail": "❌ Your error message: %s",
+     "modlistexporter.chat.export_auto_fail": "❌ Your auto-export error message: %s"
+   }
+   ```
+
+3. **Test your translation**:
+   - Build the project: `./gradlew build`
+   - Run the client: `./gradlew runClient`
+   - Change your Minecraft language to test the translation
+   - Verify keybind labels and chat messages display correctly
+
+4. **Submit your translation**:
+   - Create a pull request with your new language file
+   - Include the language code in the filename
+   - Test that all strings are properly translated
+
+### Supported Languages
+
+Currently supported languages:
+- **English (en_us)** - Default language
+- **Spanish (es_es)** - Sample translation
+- **French (fr_fr)** - Sample translation
+
+### Translation Guidelines
+
+- Keep messages concise and clear
+- Maintain the `%s` placeholder for dynamic content
+- Use appropriate emojis and formatting
+- Test with both success and error scenarios
+- Ensure the keybinding category name is descriptive
+
 ## License
 
 This project is licensed under the MIT License.

@@ -1,0 +1,8 @@
+{
+  "modlistexporter.key.category": "Exportateur de Liste de Mods",
+  "modlistexporter.key.export": "Exporter la Liste de Mods",
+  "modlistexporter.chat.export_success": "✅ Liste de mods exportée vers config/modlistexporter/modlist.txt et modlist.md (%s copié dans le presse-papiers)",
+  "modlistexporter.chat.export_auto": "✅ Liste de mods exportée automatiquement au démarrage (%s copié dans le presse-papiers)",
+  "modlistexporter.chat.export_fail": "❌ Échec de l'exportation de la liste de mods : %s",
+  "modlistexporter.chat.export_auto_fail": "❌ Échec de l'exportation automatique de la liste de mods : %s"
+}
