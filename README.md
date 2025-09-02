@@ -1,30 +1,50 @@
 # ModList Exporter
 
-A Minecraft Fabric mod for 1.21.x that exports your installed mod list as plain text and markdown, saving to both a file and the clipboard.
+A lightweight Minecraft Fabric mod that exports your installed mod list in multiple formats for easy sharing and documentation.
 
-## User Guide
+## ✨ Features
 
-### What This Mod Does
+- **Multiple Export Formats**: Plain text and Markdown table formats
+- **Dual Output**: Save to files and copy to clipboard simultaneously
+- **Configurable Behavior**: JSON configuration for auto-export and clipboard format
+- **Easy Access**: F9 keybind and `/modlist` command
+- **International Support**: Community translations with fallback to English
+- **No Dependencies**: Works with just Fabric Loader (no Fabric API required)
+- **Robust Error Handling**: Graceful fallbacks and user-friendly error messages
 
-ModList Exporter allows you to easily export your Minecraft mod list in multiple formats:
-- **Plain Text**: Simple list of mod names and versions
-- **Markdown**: Formatted table suitable for sharing on platforms like GitHub, Discord, or forums
-- **File Export**: Save the mod list to files in your Minecraft directory
-- **Clipboard Copy**: Copy the formatted list directly to your clipboard
-- **Configuration**: Customize behavior with JSON config file
-- **Auto-Export**: Automatically export on startup (configurable)
-- **Keybinding**: Press F9 to export instantly (configurable)
+## 🚀 Installation
 
-### Installation
+### Requirements
+- **Minecraft**: 1.21.1
+- **Fabric Loader**: 0.15.0+
+- **Java**: 21+
 
-1. Download the latest release JAR file from the releases page
+### Steps
+1. Download the latest release JAR from the [releases page](https://github.com/yourname/ModList-Exportor/releases)
 2. Place the JAR file in your Minecraft `mods` folder
-3. Ensure you have Fabric Loader 0.15.0+ installed
-4. Launch Minecraft with Fabric
+3. Launch Minecraft with Fabric Loader
+4. The mod will automatically create its configuration file on first run
 
-### Configuration
+## 📖 Usage
 
-The mod creates a configuration file at `config/modlistexporter/config.json` with the following options:
+### Method 1: Keybinding (Recommended)
+- **Default Key**: Press **F9** to export instantly
+- **Customize**: Go to Options → Controls → ModList Exporter to change the key
+- **Functionality**: Creates both files and copies to clipboard using your configured format
+
+### Method 2: Chat Command
+- **Command**: Type `/modlist` in chat
+- **Functionality**: Same as keybinding - exports to files and clipboard
+- **Client-side**: Works in singleplayer and multiplayer (client-side only)
+
+### Auto-Export on Startup
+- **Configuration**: Enable in `config/modlistexporter/config.json`
+- **Behavior**: Automatically exports when joining a world
+- **Delay**: 5-second delay to ensure everything is loaded
+
+## ⚙️ Configuration
+
+The mod creates a configuration file at `config/modlistexporter/config.json`:
 
 ```json
 {
@@ -33,56 +53,25 @@ The mod creates a configuration file at `config/modlistexporter/config.json` wit
 }
 ```
 
-#### Configuration Options
+### Options
+- **autoExportOnStartup**: `true` to export automatically when joining a world, `false` for manual only
+- **clipboardFormat**: `"markdown"` for Markdown table, `"plaintext"` for simple text
 
-- **autoExportOnStartup**: `true` to automatically export mod list when joining a world, `false` to only export manually
-- **clipboardFormat**: `"markdown"` to copy Markdown table to clipboard, `"plaintext"` to copy plain text
+### File Locations
+- **Configuration**: `config/modlistexporter/config.json`
+- **Plain Text Export**: `config/modlistexporter/modlist.txt`
+- **Markdown Export**: `config/modlistexporter/modlist.md`
 
-#### Default Configuration
+## 📋 Example Output
 
-If the config file doesn't exist, it will be created with these defaults:
-- Auto-export disabled (manual export only)
-- Markdown format for clipboard
-
-### How to Use
-
-#### Method 1: Keybinding (Recommended)
-- **Default Key**: Press **F9** to export your mod list instantly
-- **Customizable**: Go to Options → Controls → ModList Exporter to change the key
-- **Same Functionality**: Creates both files and copies to clipboard using your configured format
-
-#### Method 2: Manual Export - `/modlist` Command
-
-The mod includes a client-side `/modlist` command that exports your installed mod list:
-
-1. **In-Game Command**: Type `/modlist` in the chat
-2. **Automatic Export**: The mod will:
-   - Collect all installed mods via Fabric Loader
-   - Format each mod as "Name – Version (Author)" for plain text
-   - Create a Markdown table with Name, Version, and Author columns
-   - Save plain text to `modlist.txt` in your Minecraft game directory
-   - Save Markdown to `modlist.md` in your Minecraft game directory
-   - Copy content to clipboard based on your configuration setting
-   - Send a confirmation message showing the format used
-
-#### Auto-Export on Startup
-
-If enabled in the configuration:
-1. **Automatic**: When you join a world, the mod automatically exports your mod list
-2. **Delayed**: Auto-export happens 5 seconds after joining to ensure everything is loaded
-3. **Same Output**: Creates both files and copies to clipboard using your configured format
-4. **Confirmation**: Shows "✅ Auto-exported mod list on startup (X copied to clipboard)"
-
-#### Example Output
-
-The `modlist.txt` file will contain entries like:
+### Plain Text (`modlist.txt`)
 ```
 Fabric Loader – 0.15.11 (FabricMC)
 Minecraft – 1.21.1 (Unknown)
 ModList Exporter – 1.0.0 (Stephen Beacham)
 ```
 
-The `modlist.md` file will contain a formatted table like:
+### Markdown (`modlist.md`)
 ```markdown
 | Name | Version | Author |
 |------|---------|--------|
@@ -91,147 +80,57 @@ The `modlist.md` file will contain a formatted table like:
 | ModList Exporter | 1.0.0 | Stephen Beacham |
 ```
 
-#### File Locations
+## 🌍 Translations
 
-The exported files will be saved in your Minecraft game directory at:
-- `config/modlistexporter/modlist.txt` (plain text)
-- `config/modlistexporter/modlist.md` (Markdown table)
-- `config/modlistexporter/config.json` (configuration file)
+ModList Exporter supports community translations! The mod automatically uses your Minecraft language setting.
 
-## Developer Guide
+### Supported Languages
+- **English (en_us)** - Default language
+- **Spanish (es_es)** - Complete translation
+- **French (fr_fr)** - Complete translation
 
-### Building the Project
+### Adding Translations
+See the [Contributing](#contributing) section below for how to add new languages.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourname/ModList-Exportor.git
-   cd ModList-Exportor
-   ```
+## 🛠️ Development
 
-2. Build the project:
-   ```bash
-   ./gradlew build
-   ```
+### Building
+```bash
+git clone https://github.com/yourname/ModList-Exportor.git
+cd ModList-Exportor
+./gradlew build
+```
 
-### Running the Mod
-
-To run Minecraft with the mod loaded:
-
+### Running
 ```bash
 ./gradlew runClient
 ```
 
-This will:
-- Download Minecraft 1.21.1 if not already present
-- Download Fabric Loader and API
-- Launch Minecraft with the mod loaded
-- You should see "Hello World from ModList Exporter!" in the logs
-- Configuration will be initialized automatically
-
 ### Testing
-
-The project includes JUnit 5 for unit testing:
-
 ```bash
 ./gradlew test
 ```
 
-Test classes are located in `src/test/java/com/yourname/modlistexporter/`:
-- `ExportFormatterTest.java` - Tests for mod list formatting functionality (plain text and Markdown)
-- `ClipboardHelperTest.java` - Tests for clipboard operations
-- `ModConfigTest.java` - Tests for configuration loading, saving, and default values
-- `ExportKeybindTest.java` - Tests for keybinding registration and functionality
+## 🤝 Contributing
 
-### Project Structure
-
-```
-src/
-├── main/
-│   ├── java/com/yourname/modlistexporter/
-│   │   ├── ModListExporter.java          # Main mod entry point
-│   │   ├── ModListExporterClient.java    # Client-side initialization
-│   │   ├── commands/
-│   │   │   └── ExportCommand.java       # /modlist command handler
-│   │   ├── config/
-│   │   │   └── ModConfig.java           # Configuration management
-│   │   ├── keybind/
-│   │   │   └── ExportKeybind.java       # F9 keybinding handler
-│   │   ├── mixin/
-│   │   │   ├── ChatScreenMixin.java     # Chat interception mixin
-│   │   │   └── MinecraftClientMixin.java # Keybinding tick handler
-│   │   └── utils/
-│   │       ├── ExportFormatter.java     # Mod list formatting utility (plain text & Markdown)
-│   │       └── ClipboardHelper.java    # Clipboard operations utility
-│   └── resources/
-│       ├── fabric.mod.json              # Mod metadata
-│       ├── modlistexporter.mixins.json  # Mixin configuration
-│       └── assets/modlistexporter/
-│           ├── lang/en_us.json          # English translations
-│           └── icon.png                 # Mod icon
-└── test/
-    └── java/com/yourname/modlistexporter/
-        ├── ExportFormatterTest.java     # Formatting tests (plain text & Markdown)
-        ├── ClipboardHelperTest.java    # Clipboard tests
-        ├── ModConfigTest.java          # Configuration tests
-        └── ExportKeybindTest.java      # Keybinding tests
-```
-
-### Dependencies
-
-- **Minecraft**: 1.21.1
-- **Fabric Loader**: 0.15.0+
-- **Java**: 21+
-- **Gradle**: 8.6+
-- **Gson**: 2.10.1 (for JSON configuration)
-
-## Contributing
+We welcome contributions! Here's how you can help:
 
 ### Adding Translations
+1. Create a new language file in `src/main/resources/assets/modlistexporter/lang/`
+2. Use the format: `{language_code}_{country_code}.json` (e.g., `de_de.json`)
+3. Copy the structure from `en_us.json` and translate all keys
+4. Submit a pull request with your translation
 
-ModList Exporter supports community translations! To add a new language:
+### Reporting Issues
+- Use the [Issues](https://github.com/yourname/ModList-Exportor/issues) page
+- Include Minecraft version, Fabric Loader version, and error details
+- Check existing issues before creating a new one
 
-1. **Create a new language file** in `src/main/resources/assets/modlistexporter/lang/`
-   - Use the format: `{language_code}_{country_code}.json` (e.g., `es_es.json`, `fr_fr.json`, `de_de.json`)
-   - Copy the structure from `en_us.json` as a template
+### Feature Requests
+- Open an issue with the "enhancement" label
+- Describe the feature and its use case
+- Check the [ROADMAP.md](ROADMAP.md) for planned features
 
-2. **Translate all keys** in the file:
-   ```json
-   {
-     "modlistexporter.key.category": "Your Category Name",
-     "modlistexporter.key.export": "Your Export Button Text",
-     "modlistexporter.chat.export_success": "✅ Your success message (%s copied to clipboard)",
-     "modlistexporter.chat.export_auto": "✅ Your auto-export message (%s copied to clipboard)",
-     "modlistexporter.chat.export_fail": "❌ Your error message: %s",
-     "modlistexporter.chat.export_auto_fail": "❌ Your auto-export error message: %s"
-   }
-   ```
+## 📄 License
 
-3. **Test your translation**:
-   - Build the project: `./gradlew build`
-   - Run the client: `./gradlew runClient`
-   - Change your Minecraft language to test the translation
-   - Verify keybind labels and chat messages display correctly
-
-4. **Submit your translation**:
-   - Create a pull request with your new language file
-   - Include the language code in the filename
-   - Test that all strings are properly translated
-
-### Supported Languages
-
-Currently supported languages:
-- **English (en_us)** - Default language
-- **Spanish (es_es)** - Sample translation
-- **French (fr_fr)** - Sample translation
-
-### Translation Guidelines
-
-- Keep messages concise and clear
-- Maintain the `%s` placeholder for dynamic content
-- Use appropriate emojis and formatting
-- Test with both success and error scenarios
-- Ensure the keybinding category name is descriptive
-
-## License
-
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
