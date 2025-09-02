@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "modlistexporter",
+  "version": "1.0.0",
+  "name": "ModList Exporter",
+  "description": "Export your Minecraft mod list in multiple formats for easy sharing. Features include plain text and Markdown export, clipboard integration, configurable auto-export, and F9 keybinding.",
+  "authors": [
+    "Stephen Beacham"
+  ],
+  "contact": {
+    "homepage": "https://github.com/yourname/ModList-Exportor",
+    "sources": "https://github.com/yourname/ModList-Exportor",
+    "issues": "https://github.com/yourname/ModList-Exportor/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/modlistexporter/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.yourname.modlistexporter.ModListExporter"
+    ],
+    "client": [
+      "com.yourname.modlistexporter.ModListExporterClient"
+    ]
+  },
+  "mixins": [
+    "modlistexporter.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.20.4",
+    "java": ">=21"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
