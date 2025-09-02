@@ -1,0 +1,37 @@
+// Common module - shared code with no Minecraft dependencies
+apply plugin: 'java-library'
+
+repositories {
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    // Fabric Loader API for mod metadata access
+    api 'net.fabricmc:fabric-loader:0.15.11'
+    
+    // Gson for JSON configuration
+    api 'com.google.code.gson:gson:2.10.1'
+    
+    // JUnit 5 for testing
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}"}
+    }
+}
+
+// Configure maven publication
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}

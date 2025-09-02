@@ -9,3 +9,6 @@ pluginManagement {
 }
 
 rootProject.name = 'modlistexporter'
+
+include ':common'
+include ':fabric-1.21.1'
